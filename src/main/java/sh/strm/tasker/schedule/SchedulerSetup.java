@@ -2,7 +2,8 @@ package sh.strm.tasker.schedule;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.Trigger;
@@ -31,7 +32,7 @@ public class SchedulerSetup {
 	@Autowired
 	private DockerTaskRunner dockerRunner;
 
-	private static final Logger log = Logger.getLogger(SchedulerSetup.class);
+	private static final Logger log = LoggerFactory.getLogger(SchedulerSetup.class);
 
 	public void setConfiguration(ScheduleConfiguration configuration) {
 		this.configuration = configuration;
@@ -65,7 +66,7 @@ public class SchedulerSetup {
 		}
 
 		for (Schedule schedule : configuration.getSchedule()) {
-			log.info(schedule);
+			log.info(schedule.toString());
 
 			Trigger trigger = new CronTrigger(schedule.getCron());
 			taskScheduler.schedule(() -> {

@@ -2,7 +2,8 @@ package sh.strm.tasker.task;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ public class TaskSetup {
 	@Autowired
 	private TaskConfiguration conf;
 
-	private static final Logger log = Logger.getLogger(TaskSetup.class);
+	private static final Logger log = LoggerFactory.getLogger(TaskSetup.class);
 
 	public void setConfiguration(TaskConfiguration conf) {
 		this.conf = conf;

@@ -3,7 +3,8 @@ package sh.strm.tasker.notify;
 import javax.annotation.PostConstruct;
 import javax.mail.MessagingException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,7 @@ public class NotifierSetup {
 	@Autowired
 	private NotifierConfiguration configuration;
 
-	private static final Logger log = Logger.getLogger(NotifierSetup.class);
+	private static final Logger log = LoggerFactory.getLogger(NotifierSetup.class);
 
 	public void setConfiguration(NotifierConfiguration configuration) {
 		this.configuration = configuration;
@@ -36,7 +37,7 @@ public class NotifierSetup {
 		log.info("Notifier configuration loaded, wiring tasks and notifiers");
 
 		for (Notifier notifier : configuration.getNotifiers()) {
-			log.info(notifier);
+			log.info(notifier.toString());
 
 			DockerTask task = taskConfiguration.getDockerTaskByName(notifier.getTask());
 

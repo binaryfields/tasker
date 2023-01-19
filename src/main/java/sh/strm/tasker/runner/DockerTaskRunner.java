@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.spotify.docker.client.DefaultDockerClient;
@@ -23,7 +24,7 @@ import sh.strm.tasker.util.Docker;
 
 public class DockerTaskRunner extends Runner<DockerTask> {
 
-	static Logger log = Logger.getLogger(DockerTaskRunner.class.getName());
+	static Logger log = LoggerFactory.getLogger(DockerTaskRunner.class.getName());
 
 	private DefaultDockerClient docker;
 	private Docker client;
@@ -116,7 +117,7 @@ public class DockerTaskRunner extends Runner<DockerTask> {
 		TaskExecutionResult result = new TaskExecutionResult(task);
 		// TODO : Do some descent exception treatment
 		if (exit.statusCode() != 0) {
-			result.markAsFinished(exit.statusCode());
+			result.markAsFinished(exit.statusCode().intValue());
 		} else {
 			result.markAsFinishedWithSuccess();
 		}

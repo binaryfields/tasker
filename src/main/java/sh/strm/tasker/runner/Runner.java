@@ -2,14 +2,15 @@ package sh.strm.tasker.runner;
 
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sh.strm.tasker.notify.Notifier;
 import sh.strm.tasker.task.Task;
 
 public abstract class Runner<T extends Task> {
 
-	static Logger log = Logger.getLogger(DockerTaskRunner.class.getName());
+	static Logger log = LoggerFactory.getLogger(DockerTaskRunner.class.getName());
 
 	public TaskExecutionResult execute(T task) {
 		long timeStart = System.currentTimeMillis();

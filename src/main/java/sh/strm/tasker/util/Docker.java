@@ -2,7 +2,8 @@ package sh.strm.tasker.util;
 
 import java.util.Objects;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.spotify.docker.client.DefaultDockerClient;
 import com.spotify.docker.client.DockerClient.ListContainersParam;
@@ -13,7 +14,7 @@ import sh.strm.tasker.runner.DockerTaskRunner;
 
 public class Docker {
 
-	static Logger log = Logger.getLogger(DockerTaskRunner.class.getName());
+	static Logger log = LoggerFactory.getLogger(DockerTaskRunner.class.getName());
 
 	private DefaultDockerClient client;
 
@@ -62,7 +63,7 @@ public class Docker {
 				Long total = message.progressDetail().total();
 				log.info("Pulling image " + name + " " + current + " / " + total);
 			} else {
-				log.info(message);
+				log.info(message.toString());
 			}
 		});
 	}
